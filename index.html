@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokMon</title>
+  </head>
+  <style>
+    .container {
+      height: 300px;
+      width: 300px;
+      background-color: bisque;
+      border-radius: 10px;
+    }
+    img {
+      height: 140px;
+      width: 149px;
+      background-color: aqua;
+    }
+
+    #name {
+      height: 30px;
+      width: 40px;
+      margin: auto;
+    }
+  </style>
+  <body>
+    <div class="container" id="pokcontainer">
+      <!-- <div class="img" id="img">
+        <img src="" alt="" />
+      </div>
+      <h1 id="name">Name</h1>
+      <button id="btn">Get PokMon</button> -->
+    </div>
+  </body>
+  <script>
+    let btn = document.getElementById("btn");
+    let names = document.getElementById("Name");
+    let pokcontainer = document.getElementById("pokcontainer");
+
+    let url='https://pokeapi.co/api/v2/pokemon/'
+let getrandomNumber=async()=>{
+    const id=Math.floor(Math.random()*150)+1
+console.log(id)
+
+const finalurl=url+id
+console.log(finalurl)
+
+const data=await fetch(finalurl)
+const response=await data.json()
+console.log(response)
+const imgsrc=response.sprites.other.dream_world.front_default
+
+const ids=response.id
+pokcontainer.innerHTML=`
+
+<div class="img" id="img">
+        <img src=${imgsrc} alt="" />
+      </div>
+      <h1 id="name">${ids}</h1>
+      <h1 id="name">${response.order}</h1>
+      <button id="btn">Get PokMon</button> 
+
+`
+}
+
+getrandomNumber()
+
+btn.addEventListener("click",getrandomNumber())
+
+
+// randomid()
+
+//     async function pok() {
+
+//         const id=Math.floor(Math.random()*150)+1
+// console.log(id)
+// const fetchurl= url + id
+//       let data = await fetch(fetchurl)
+//       let response = await data.json();
+//       console.log(response);
+//       const imgsrc = response.sprites.other.dream_world.front_default;
+//       const pokName=response.name
+// //       console.log(imgsrc);
+// //       let img = document.createElement("div");
+// //       img.classList.add("img");
+// //       img.innerHTML = `
+// // <img src=${imgsrc}>
+// // `;
+// //       pokcontainer.appendChild(img);
+
+// pokcontainer.innerHTML=`
+// <div class="img" id="img">
+//         <img src=${imgsrc} alt="" />
+//       </div>
+//       <h1 id="name">${pokName}</h1>
+//       <button id="btn">Get PokMon</button>
+
+// `
+
+
+//     }
+
+//     pok();
+//     btn.addEventListener("click", pok);
+  </script>
+</html>
